@@ -5,123 +5,176 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kontakt | BulkReturns</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="script.js" defer></script>
     <style>
-        /* Contact Page Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #2c3e50;
+            --primary-dark: #1a252f;
+            --accent: #3498db;
+            --light-gray: #f5f7fa;
+            --white: #ffffff;
+            --text: #333333;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e7eb 100%);
+            color: var(--text);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .page-container {
+            flex: 1;
+            max-width: 1200px;
+            width: 100%;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 36px;
+            color: var(--primary);
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--accent);
+            border-radius: 2px;
+        }
+
         .contact-container {
             display: flex;
-            flex-wrap: wrap;
+            flex-direction: column;
+            align-items: center;
             gap: 40px;
-            max-width: 1200px;
+            max-width: 800px;
             margin: 0 auto;
         }
-        
-        .contact-info {
-            flex: 1;
-            min-width: 300px;
-        }
-        
-        .contact-form-container {
-            flex: 1;
-            min-width: 300px;
-        }
-        
-        .contact-info-box {
+
+        .contact-card {
             background: var(--white);
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            margin-bottom: 30px;
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            padding: 40px;
+            width: 100%;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-        
-        .contact-item {
-            display: flex;
-            align-items: flex-start;
-            margin-bottom: 20px;
+
+        .contact-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
         }
-        
+
         .contact-icon {
-            width: 40px;
-            height: 40px;
-            background: var(--primary);
+            width: 90px;
+            height: 90px;
+            background: linear-gradient(135deg, var(--accent) 0%, #1e6cc7 100%);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
-            font-size: 1.2rem;
-            margin-right: 15px;
-            flex-shrink: 0;
+            margin: 0 auto 25px;
+            color: var(--white);
+            font-size: 36px;
         }
-        
-        .contact-form {
-            background: var(--white);
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-        }
-        
-        .form-group {
+
+        .contact-title {
+            font-size: 28px;
+            color: var(--primary);
             margin-bottom: 20px;
         }
-        
-        .form-group label {
+
+        .contact-email {
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--accent);
+            margin: 15px 0;
             display: block;
-            margin-bottom: 8px;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .contact-email:hover {
+            color: #1e6cc7;
+            text-decoration: underline;
+        }
+
+        .response-info {
+            background: rgba(52, 152, 219, 0.1);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 25px 0;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 18px;
             font-weight: 500;
         }
-        
-        .form-group input,
-        .form-group textarea,
-        .form-group select {
-            width: 100%;
-            padding: 12px 15px;
-            border: 1px solid var(--light-gray);
-            border-radius: 4px;
-            font-size: 1rem;
+
+        .response-info i {
+            color: var(--accent);
+            font-size: 24px;
         }
-        
-        .form-group textarea {
-            height: 150px;
-            resize: vertical;
-        }
-        
-        .submit-btn {
-            background: var(--primary);
-            color: white;
-            border: none;
-            padding: 12px 30px;
-            font-size: 1rem;
-            font-weight: 600;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
-        
-        .submit-btn:hover {
-            background: var(--primary-dark);
-        }
-        
-        .map-container {
-            margin-top: 40px;
-            height: 300px;
-            background: var(--light-gray);
-            border-radius: 8px;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .map-placeholder {
+
+        .company-description {
             text-align: center;
-            padding: 20px;
+            line-height: 1.8;
+            font-size: 18px;
+            max-width: 700px;
+            margin: 0 auto;
         }
-        
-        .map-placeholder i {
-            font-size: 3rem;
-            color: var(--primary);
-            margin-bottom: 15px;
+
+        .company-description p {
+            margin-bottom: 20px;
+        }
+
+        .highlight {
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .section-title {
+                font-size: 28px;
+            }
+            
+            .contact-card {
+                padding: 30px 20px;
+            }
+            
+            .contact-title {
+                font-size: 24px;
+            }
+            
+            .contact-email {
+                font-size: 18px;
+            }
+            
+            .company-description {
+                font-size: 16px;
+            }
         }
     </style>
 </head>
@@ -130,144 +183,32 @@
     <header id="header-placeholder"></header>
 
     <main class="page-container">
-        <section>
-            <h2 class="section-title">Skontaktuj się z nami</h2>
-            
-            <div class="contact-container">
-                <div class="contact-info">
-                    <div class="contact-info-box">
-                        <h3>Dane kontaktowe</h3>
-                        
-                        <div class="contact-item">
-                            <div class="contact-icon">
-                                <i class="fas fa-map-marker-alt"></i>
-                            </div>
-                            <div>
-                                <h4>Adres</h4>
-                                <p>ul. Hurtowa 8<br>00-001 Warszawa</p>
-                            </div>
-                        </div>
-                        
-                        <div class="contact-item">
-                            <div class="contact-icon">
-                                <i class="fas fa-phone"></i>
-                            </div>
-                            <div>
-                                <h4>Telefon</h4>
-                                <p>+48 123 456 789</p>
-                            </div>
-                        </div>
-                        
-                        <div class="contact-item">
-                            <div class="contact-icon">
-                                <i class="fas fa-envelope"></i>
-                            </div>
-                            <div>
-                                <h4>Email</h4>
-                                <p>kontakt@bulkreturns.pl</p>
-                            </div>
-                        </div>
-                        
-                        <div class="contact-item">
-                            <div class="contact-icon">
-                                <i class="fas fa-clock"></i>
-                            </div>
-                            <div>
-                                <h4>Godziny pracy</h4>
-                                <p>Pon-Pt: 8:00 - 16:00<br>Sob: 9:00 - 13:00<br>Niedz: Zamknięte</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="contact-info-box">
-                        <h3>Masz pytania?</h3>
-                        <p>Nasz zespół jest gotowy odpowiedzieć na wszystkie Twoje pytania dotyczące naszych produktów, zamówień lub współpracy.</p>
-                        <p>Możesz skontaktować się z nami telefonicznie, mailowo lub poprzez formularz kontaktowy.</p>
-                        <p>Odpowiadamy na wiadomości w ciągu 24 godzin w dni robocze.</p>
-                    </div>
+        <h2 class="section-title">Skontaktuj się z nami</h2>
+        
+        <div class="contact-container">
+            <div class="contact-card">
+                <div class="contact-icon">
+                    <i class="fas fa-envelope"></i>
                 </div>
+                <h3 class="contact-title">Nasz adres email</h3>
+                <a href="mailto:kontakt@bulkreturns.pl" class="contact-email">kontakt@bulkreturns.pl</a>
                 
-                <div class="contact-form-container">
-                    <div class="contact-form">
-                        <h3>Wyślij wiadomość</h3>
-                        <form id="contactForm">
-                            <div class="form-group">
-                                <label for="name">Imię i nazwisko</label>
-                                <input type="text" id="name" required>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="email">Adres email</label>
-                                <input type="email" id="email" required>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="phone">Numer telefonu</label>
-                                <input type="tel" id="phone">
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="subject">Temat wiadomości</label>
-                                <select id="subject" required>
-                                    <option value="">Wybierz temat</option>
-                                    <option value="order">Zapytanie o zamówienie</option>
-                                    <option value="products">Pytanie o produkty</option>
-                                    <option value="cooperation">Współpraca</option>
-                                    <option value="other">Inne</option>
-                                </select>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="message">Treść wiadomości</label>
-                                <textarea id="message" required></textarea>
-                            </div>
-                            
-                            <button type="submit" class="submit-btn">Wyślij wiadomość</button>
-                        </form>
-                    </div>
+                <div class="response-info">
+                    <i class="fas fa-clock"></i>
+                    Odpowiadamy na wiadomości w ciągu 24 godzin w dni robocze
                 </div>
             </div>
             
-            <div class="map-container">
-                <div class="map-placeholder">
-                    <i class="fas fa-map-marked-alt"></i>
-                    <h3>Mapa dojazdu</h3>
-                    <p>ul. Hurtowa 8, 00-001 Warszawa</p>
-                </div>
+            <div class="company-description">
+                <h3 class="contact-title">O nas</h3>
+                <p>BulkReturns to innowacyjna firma specjalizująca się w optymalizacji procesów zwrotów towarów dla przedsiębiorstw. Działamy na rynku od 2010 roku, zapewniając naszym klientom najwyższą jakość usług i indywidualne podejście do każdego przypadku.</p>
+                <p>Nasz zespół doświadczonych specjalistów stale pracuje nad usprawnianiem procesów logistycznych, co pozwala naszym partnerom biznesowym <span class="highlight">oszczędzać czas i redukować koszty operacyjne</span>.</p>
+                <p>Współpracujemy z firmami z różnych branż, oferując kompleksowe rozwiązania dostosowane do ich specyficznych potrzeb.</p>
             </div>
-        </section>
+        </div>
     </main>
 
     <!-- Footer placeholder -->
     <footer id="footer-placeholder"></footer>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Handle contact form submission
-            const contactForm = document.getElementById('contactForm');
-            if (contactForm) {
-                contactForm.addEventListener('submit', function(e) {
-                    e.preventDefault();
-                    alert('Dziękujemy za wiadomość! Skontaktujemy się z Tobą w ciągu 24 godzin.');
-                    contactForm.reset();
-                });
-            }
-            
-            // Load header and footer
-            loadComponent('header-placeholder', 'header.html');
-            loadComponent('footer-placeholder', 'footer.html');
-        });
-
-        function loadComponent(placeholderId, file) {
-            const xhr = new XMLHttpRequest();
-            xhr.open('GET', file, true);
-            xhr.onreadystatechange = function() {
-                if (xhr.readyState === 4 && xhr.status === 200) {
-                    document.getElementById(placeholderId).innerHTML = xhr.responseText;
-                }
-            };
-            xhr.send();
-        }
-    </script>
 </body>
 </html>
