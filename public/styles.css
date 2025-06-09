@@ -116,20 +116,20 @@ header {
 
 .cart-count {
     position: absolute;
-    top: -6px;        /* Dostosowane */
-    right: -6px;      /* Dostosowane */
+    top: -5px;        /* Dostosowane */
+    right: -5px;      /* Dostosowane */
     background-color: var(--danger);
     color: white;
     border-radius: 50%;
-    width: 18px;      /* Zmniejszone */
-    height: 18px;     /* Zmniejszone */
+    width: 16px;      /* Zmniejszone */
+    height: 16px;     /* Zmniejszone */
     font-size: 10px;  /* Zmniejszone */
     display: flex;
     justify-content: center;
     align-items: center;
     font-weight: bold;
     box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-    animation: pulse 3.5s infinite;
+    animation: pulse 10s infinite;
 }
 
 @keyframes pulse {
