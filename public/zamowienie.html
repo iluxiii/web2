@@ -157,7 +157,7 @@
       const div = document.createElement('div');
       div.className = 'order-item';
       
-      // Dodajemy ostrzeżenie dla palet
+      // Dodajemy ostrzeżenie dla palet w podsumowaniu
       const warning = item.id.startsWith('2-') 
         ? '<div class="pallet-warning"><i class="fas fa-exclamation-triangle"></i> Płatność za pobraniem niedostępna</div>' 
         : '';
@@ -182,12 +182,7 @@
       const codOption = Array.from(paymentSelect.options).find(opt => opt.value === 'pobranie');
       if (codOption) codOption.remove();
       
-      // Dodajemy informację o ograniczeniu
-      const paymentGroup = paymentSelect.closest('.form-group');
-      const info = document.createElement('p');
-      info.className = 'restriction-info';
-      info.innerHTML = '<i class="fas fa-exclamation-circle"></i> Płatność za pobraniem jest niedostępna dla palet';
-      paymentGroup.appendChild(info);
+      // USUNIĘTO: Dodawanie czerwonego komunikatu pod listą płatności
     }
 
     document.getElementById('order-form').addEventListener('submit', e => {
@@ -228,17 +223,9 @@
         .catch(() => alert('Błąd zapisu zamówienia.'));
     });
 
-    // Dodajemy style dla komunikatów
+    // Dodajemy style tylko dla ostrzeżeń przy produktach
     const style = document.createElement('style');
     style.textContent = `
-      .restriction-info {
-        color: #e74c3c;
-        margin-top: 8px;
-        font-size: 14px;
-        display: flex;
-        align-items: center;
-        gap: 5px;
-      }
       .pallet-warning {
         color: #e67e22;
         font-size: 12px;
