@@ -14,6 +14,7 @@
       box-shadow: 0 4px 12px rgba(0,0,0,0.1);
       max-width: 700px;
       margin: 0 auto;
+      position: relative;
     }
     .form-group {
       margin-bottom: 20px;
@@ -61,6 +62,22 @@
       font-size: 1.2rem;
       margin-top: 20px;
     }
+    
+    /* Nowy styl dla przycisku cofania */
+    .back-button {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: var(--primary);
+      z-index: 10;
+    }
+    .section-title {
+      text-align: center;
+    }
   </style>
 </head>
 <body>
@@ -69,6 +86,11 @@
   <section>
     <h2 class="section-title">Finalizacja zamówienia</h2>
     <div class="order-form-container">
+      <!-- Dodany przycisk cofania -->
+      <button class="back-button" onclick="goBack()">
+        <i class="fas fa-arrow-left"></i>
+      </button>
+      
       <form id="order-form">
         <div class="form-row">
           <div class="form-group">
@@ -129,6 +151,11 @@
 </main>
 <footer id="footer-placeholder"></footer>
 <script>
+  // Funkcja do cofania do poprzedniej strony
+  function goBack() {
+    window.history.back();
+  }
+
   const ICONS = {
     'box': 'fa-box',
     'pallet': 'fa-pallet'
@@ -181,8 +208,6 @@
       // Usuwamy opcję płatności za pobraniem
       const codOption = Array.from(paymentSelect.options).find(opt => opt.value === 'pobranie');
       if (codOption) codOption.remove();
-      
-      // USUNIĘTO: Dodawanie czerwonego komunikatu pod listą płatności
     }
 
     document.getElementById('order-form').addEventListener('submit', e => {
