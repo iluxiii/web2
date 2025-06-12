@@ -146,38 +146,55 @@
 
     <!-- Footer placeholder -->
     <footer id="footer-placeholder"></footer>
-    <script src="script.js"></script>
     <script>
-        // FAQ Accordion
-        document.addEventListener('DOMContentLoaded', function() {
-            const faqQuestions = document.querySelectorAll('.faq-question');
-            
-            faqQuestions.forEach(question => {
-                question.addEventListener('click', () => {
-                    const faqItem = question.parentElement;
-                    const answer = question.nextElementSibling;
-                    
-                    // Toggle active class
-                    faqItem.classList.toggle('active');
-                    answer.classList.toggle('active');
-                });
-            });
-            
-            // Load header and footer
-            loadComponent('header-placeholder', 'header.html');
-            loadComponent('footer-placeholder', 'footer.html');
-        });
+  // ===== LICZNIK W NAGŁÓWKU =====
+  function loadCartCount() {
+    const saved = localStorage.getItem('cartCount');
+    return saved ? parseInt(saved, 10) : 0;
+  }
+  function updateCartIcon(count) {
+    document.querySelectorAll('.cart-count').forEach(el => {
+      el.textContent = count;
+      el.style.display = count > 0 ? 'inline-flex' : 'none';
+    });
+  }
 
-        function loadComponent(placeholderId, file) {
-            const xhr = new XMLHttpRequest();
-            xhr.open('GET', file, true);
-            xhr.onreadystatechange = function() {
-                if (xhr.readyState === 4 && xhr.status === 200) {
-                    document.getElementById(placeholderId).innerHTML = xhr.responseText;
-                }
-            };
-            xhr.send();
-        }
-    </script>
+  // ===== ROZSZERZONA FUNKCJA LOAD COMPONENT =====
+  function loadComponent(placeholderId, file, cb) {
+    const xhr = new XMLHttpRequest();
+    xhr.open('GET', file, true);
+    xhr.onreadystatechange = function() {
+      if (xhr.readyState === 4 && xhr.status === 200) {
+        document.getElementById(placeholderId).innerHTML = xhr.responseText;
+        if (typeof cb === 'function') cb();
+      }
+    };
+    xhr.send();
+  }
+
+  // ===== FAQ ACCORDION + DYNAMIC LOAD =====
+  document.addEventListener('DOMContentLoaded', function() {
+    // 1) Accordion FAQ
+    const faqQuestions = document.querySelectorAll('.faq-question');
+    faqQuestions.forEach(question => {
+      question.addEventListener('click', () => {
+        const faqItem = question.parentElement;
+        const answer  = question.nextElementSibling;
+        faqItem.classList.toggle('active');
+        answer.classList.toggle('active');
+      });
+    });
+
+    // 2) Wczytanie headera z callbackiem do licznika
+    loadComponent('header-placeholder', 'header.html', () => {
+      const cnt = loadCartCount();
+      updateCartIcon(cnt);
+    });
+
+    // 3) Wczytanie stopki (bez callbacka)
+    loadComponent('footer-placeholder', 'footer.html');
+  });
+</script>
+
 </body>
 </html>
