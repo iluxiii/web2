@@ -150,24 +150,38 @@
 
     <!-- Footer placeholder -->
     <footer id="footer-placeholder"></footer>
-    <script src="script.js"></script>
+    
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Load header and footer
-            loadComponent('header-placeholder', 'header.html');
-            loadComponent('footer-placeholder', 'footer.html');
-        });
+        // ===== LICZNIK W NAGŁÓWKU =====
+        function loadCartCount() {
+            const saved = localStorage.getItem('cartCount');
+            return saved ? parseInt(saved, 10) : 0;
+        }
+        function updateCartIcon(count) {
+            document.querySelectorAll('.cart-count').forEach(el => {
+                el.textContent = count;
+                el.style.display = count > 0 ? 'inline-flex' : 'none';
+            });
+        }
 
-        function loadComponent(placeholderId, file) {
+        function loadComponent(placeholderId, file, cb) {
             const xhr = new XMLHttpRequest();
             xhr.open('GET', file, true);
             xhr.onreadystatechange = function() {
                 if (xhr.readyState === 4 && xhr.status === 200) {
                     document.getElementById(placeholderId).innerHTML = xhr.responseText;
+		    if(typeof cb === 'function') cb();
                 }
             };
             xhr.send();
         }
+	document.addEventListener('DOMContentLoaded', function() {
+		loadComponent('header-placeholder', 'header.html', () => {
+			const cnt = loadCartCount();
+			updateCartIcon(cnt);
+		});
+	loadComponent('footer-placeholder', 'footer.html');
+	});
     </script>
 </body>
 </html>
